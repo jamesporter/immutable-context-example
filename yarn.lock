@@ -4731,10 +4731,10 @@ immer@^2.0.0:
   resolved "https://registry.yarnpkg.com/immer/-/immer-2.0.0.tgz#d834c874d2d249f73511af39f3ef1ed3b7411132"
   integrity sha512-qwwvbGbidU0P5SjO4s1wZ9hjNj8fQ908UVtKDSAYgxuDiY1MFylCvsQJSr/fUUo3aeHdxZapdpzPi3vpwTUXUQ==
 
-immutable-context@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/immutable-context/-/immutable-context-0.0.3.tgz#ec1e29c372c2e8ba95a18338c7d6ed84f1b5a72d"
-  integrity sha512-RWWFIkhJaudjg+6fsfYJw0kwcnf1O29QKou1INZ7dqZbXndbySNPmRlLYtYf6Vu+lWTnxvE6BOU0x5A6I2CR8Q==
+immutable-context@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/immutable-context/-/immutable-context-0.0.4.tgz#81d9146428a364510e1e0946769c7b46901a70bd"
+  integrity sha512-d509xcuXCb2FYkTu/OAbtUlV/1EKvbUsRHzFB7hnSa3x6B+ntNtdTxCbW7CZzUMbsbkwm0RdSS55iRKdwFhPog==
   dependencies:
     immer "^2.0.0"
 

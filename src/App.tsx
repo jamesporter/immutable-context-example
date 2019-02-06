@@ -72,7 +72,6 @@ const DeepDiveUpdate = () => {
 };
 
 const App = () => (
-  // @ts-ignore
   <StateProvider>
     <CountThing />
     <CountThing />
