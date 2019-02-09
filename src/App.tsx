@@ -1,7 +1,7 @@
 import React from "react";
 import Basics from "./examples/Basics";
-// import ToDoApp from "./examples/ToDo";
-// import ToDoAppWithUndo from "./examples/ToDoWithUndo";
+import ToDoApp from "./examples/ToDo";
+import ToDoAppWithUndo from "./examples/ToDoWithUndo";
 
 const App = () => (
   <div className="apps">
@@ -9,13 +9,13 @@ const App = () => (
       <Basics />
     </div>
 
-    {/* <div className="app">
+    <div className="app">
       <ToDoApp />
-    </div> */}
+    </div>
 
-    {/* <div className="app">
+    <div className="app">
       <ToDoAppWithUndo />
-    </div> */}
+    </div>
   </div>
 );
 
