@@ -1,8 +1,53 @@
 import React from "react";
 import createImmutableContext, {
-  historyLogger,
-  ICApply
+  ICApply,
+  ImmutableStateOptions
 } from "immutable-context";
+
+export function undoManager<T>(): {
+  options: ImmutableStateOptions<T>;
+  undo: () => void;
+  redo: () => void;
+  index: () => number;
+  historySize: () => number;
+} {
+  let history: T[] = [];
+  let index = -1;
+  let setState: null | ((state: T) => void) = null;
+
+  let appendToHistory = (state: T) => {
+    index++;
+    // blow away end of history if applicable i.e. don't preserve redos)
+    history.splice(index);
+    history.push(state);
+    // TODO remove:
+    console.log(history);
+  };
+
+  return {
+    options: {
+      onInitialize: appendToHistory,
+      setSetState: setter => (setState = setter),
+      onUpdate: appendToHistory
+    },
+    undo: () => {
+      console.log("Undo", history, index);
+      if (index > 0) {
+        index--;
+        setState && setState(history[index]);
+      }
+    },
+    redo: () => {
+      console.log("Redo", history, index);
+      if (index < history.length - 1) {
+        index++;
+        setState!(history[index]);
+      }
+    },
+    historySize: () => history.length,
+    index: () => index
+  };
+}
 
 // 1. Define types
 
@@ -18,6 +63,10 @@ type ToDoAppState = {
 
 // 2. call create immutable context:
 
+const { undo, redo, historySize, index, options } = undoManager<ToDoAppState>();
+
+console.log(historySize(), index());
+
 const { StateProvider, useImmutableContext } = createImmutableContext<
   ToDoAppState
 >(
@@ -30,7 +79,7 @@ const { StateProvider, useImmutableContext } = createImmutableContext<
       }
     ]
   },
-  historyLogger()
+  options
 );
 
 // 3. Updates
@@ -104,16 +153,21 @@ const ToDoList = () => {
           remove={remove(i)}
         />
       ))}
+
+      <div>
+        <button onClick={undo}>Undo</button>
+        <button onClick={redo}>Redo</button>
+      </div>
     </div>
   );
 };
 
 // 5. App
 
-const ToDoApp = () => (
+const ToDoAppWithUndo = () => (
   <StateProvider>
     <ToDoList />
   </StateProvider>
 );
 
-export default ToDoApp;
+export default ToDoAppWithUndo;
