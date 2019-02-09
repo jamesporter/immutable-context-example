@@ -1,4 +1,4 @@
-# Immutable Context
+# Example of Immutable Context
 
 Immutable state via context, immutable updates via immer with TypeScript
 
