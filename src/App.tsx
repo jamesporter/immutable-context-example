@@ -26,21 +26,23 @@ const { StateProvider, useImmutableContext } = createImmutableContext<
       }
     }
   },
-  s => {
-    history.push(s);
-    console.log(history);
+  {
+    onUpdate: s => {
+      history.push(s);
+      console.log(history);
+    }
   }
 );
 
 const CountThing = () => {
-  const { dispatch, state } = useImmutableContext();
+  const { apply, state } = useImmutableContext();
 
   return (
     <div>
       <p>{state.count}</p>
       <button
         onClick={() =>
-          dispatch(s => {
+          apply(s => {
             s.count++;
           })
         }
@@ -53,13 +55,13 @@ const CountThing = () => {
 };
 
 const DeepDiveUpdate = () => {
-  const { dispatch } = useImmutableContext();
+  const { apply } = useImmutableContext();
 
   return (
     <div>
       <button
         onClick={() =>
-          dispatch(s => {
+          apply(s => {
             s.deeply.nested.thing.like--;
             s.count++;
           })
